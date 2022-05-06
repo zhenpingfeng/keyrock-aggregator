@@ -1,0 +1,44 @@
+[package]
+name = "aggregator"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "aggr-server"
+path = "src/server.rs"
+
+[[bin]]
+name = "aggr-client"
+path = "src/client.rs"
+
+[dependencies]
+fast-float = "0.2"
+futures = "0.3"
+prost = "0.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["raw_value"] }
+snmalloc-rs = "0.3.0-beta.1"
+thiserror = "1"
+tokio = { version = "1", features = ["full"] }
+tokio-tungstenite = { version = "0.17", features = ["rustls-tls-webpki-roots"] }
+tonic = "0.7"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+[build-dependencies]
+tonic-build = "0.7"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "deserialize"
+harness = false
+
+[profile.release]
+lto = true
+opt-level = 3
+codegen-units = 1
+
+[profile.dev]
+debug = true
