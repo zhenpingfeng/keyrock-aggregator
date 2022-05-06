@@ -29,7 +29,7 @@ yarn install
 #2 start envoy grpc proxy server make sure port 9090 not being used, u can change the port in enovy.yaml 
 sudo docker run -d -v "$(pwd)"/envoy.yaml:/etc/envoy/envoy.yaml:ro \
     --network=host envoyproxy/envoy:v1.22.0
-
+```
 > NOTE: As per [this issue](https://github.com/grpc/grpc-web/issues/436): if
 > you are running Docker on Mac/Windows, change the envoy.yaml file last `address: 0.0.0.0` to
 >
@@ -46,7 +46,7 @@ sudo docker run -d -v "$(pwd)"/envoy.yaml:/etc/envoy/envoy.yaml:ro \
 >     socket_address:
 >         address: docker.for.mac.localhost
 > ```
-
+```
 #3 run the web app
 yarn serve
 
