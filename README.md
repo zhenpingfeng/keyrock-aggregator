@@ -50,6 +50,6 @@ sudo docker run -d -v "$(pwd)"/envoy.yaml:/etc/envoy/envoy.yaml:ro \
 #3 run the web app
 yarn serve
 
-# then use browser open http://localhost:8081/ u should can see ui like below
+# then use browser open http://localhost:8080/ u should can see ui like below
 ```
 !["web grpc client](./ob.jpg?raw=true "web grpc client")
