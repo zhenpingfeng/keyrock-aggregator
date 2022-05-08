@@ -6,6 +6,7 @@ use futures::{
 
 use std::collections::VecDeque;
 use std::pin::Pin;
+use tokio::pin;
 use tokio::net::TcpStream;
 use tokio_tungstenite::{connect_async, tungstenite::Message, MaybeTlsStream, WebSocketStream};
 
@@ -81,9 +82,9 @@ impl<const N: usize> Stream for BitstampWebSocket<N> {
                 return Poll::Ready(Some(data));
             }
             let orderbook = {
-                let mut next_orderbook = self.next_orderbook();
-                let pinned = unsafe { Pin::new_unchecked(&mut next_orderbook) };
-                match ready!(pinned.poll(cx)) {
+                let next_orderbook = self.next_orderbook();
+                pin!(next_orderbook);
+                match ready!(next_orderbook.poll(cx)) {
                     Ok(orderbook) => orderbook,
                     Err(e) => {
                         panic!("{}", e);
