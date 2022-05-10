@@ -19,15 +19,6 @@ impl fmt::Display for ExchangeId {
     }
 }
 
-#[derive(Clone)]
-pub struct MarketId(pub String);
-
-impl std::borrow::Borrow<str> for MarketId {
-    fn borrow(&self) -> &str {
-        &self.0
-    }
-}
-
 pub struct Exchange<T> {
     pub id: ExchangeId,
     pub stream: BoxStream<'static, T>,
