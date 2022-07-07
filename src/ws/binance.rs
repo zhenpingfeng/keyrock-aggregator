@@ -46,7 +46,7 @@ impl<const N: usize> BinanceWebSocket<N> {
 
     async fn next_orderbook(&mut self) -> Result<OrderBook<10_usize>> {
         loop {
-            while let Some(msg) = self.stream.next().await {
+            if let Some(msg) = self.stream.next().await {
                 let msg = msg?;
                 match msg {
                     Message::Text(text) => {
